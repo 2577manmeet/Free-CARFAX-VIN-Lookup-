@@ -44,12 +44,12 @@
             height: 100%;
             background: url('https://media1.tenor.com/m/BSBOG8g4oHIAAAAd/cat-driving-cat.gif') no-repeat center center/cover;
             z-index: 0;
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.5s ease-in-out;
         }
 
-        .gif-background.active {
-            opacity: 1;
+        .gif-background.hidden {
+            opacity: 0;
         }
 
         .container {
@@ -168,17 +168,17 @@
 
         function toggleGifBackground() {
             const gifBackground = document.querySelector('.gif-background');
-            gifBackground.classList.toggle('active');
+            gifBackground.classList.toggle('hidden');
         }
 
         window.onload = function() {
-            document.body.dataset.theme = 'light';
+            document.body.dataset.theme = 'dark';
         };
     </script>
 </head>
 <body>
     <div class="gif-background"></div>
-    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Turn Off Dark Mode</button>
     <div class="container">
         <div class="decorations"></div>
         <h1>CARFAX VIN Lookup</h1>
