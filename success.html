@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CARFAX VIN Lookup</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            z-index: 10;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #666;
+            margin: 10px 0;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 15px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(0, 123, 255, 0.5);
+            border-radius: 50%;
+            animation: floatUp 10s infinite linear;
+        }
+        @keyframes floatUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(-100%); }
+        }
+    </style>
+    <script>
+        function openURL() {
+            var userText = document.getElementById('vinInput').value;
+            if (userText.length === 17) {
+                var url = 'https://www.carfax.com/VehicleHistory/p/Report.cfx?partner=TOY_0&vin=' + userText + '&source=BUP';
+                window.open(url, '_blank');
+            } else {
+                alert('Please enter a valid 17-character VIN.');
+            }
+        }
+
+        function createParticles(num) {
+            var particles = document.querySelector('.particles');
+            var colors = ['#FF5733', '#33FF57', '#3357FF', '#F39C12', '#8E44AD']; // Different colors
+
+            for (var i = 0; i < num; i++) {
+                var particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particles.appendChild(particle);
+            }
+        }
+
+        window.onload = function() {
+            createParticles(100); // Increased the number of particles
+        };
+    </script>
+</head>
+<body>
+    <div class="particles"></div>
+    <div class="container">
+        <h1>CARFAX VIN Lookup</h1>
+        <p>Enter the VIN below to see if there's a free CARFAX report available.</p>
+        <p>Please note, a report will only be shown if it already exists.</p>
+        <input type="text" id="vinInput" placeholder="Enter the VIN here" maxlength="17">
+        <button onclick="openURL()">Get CARFAX Report</button>
+    </div>
+</body>
+</html>
